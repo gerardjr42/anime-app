@@ -33,8 +33,22 @@ const createAnime = async (anime) => {
   }
 };
 
+//Delete an anime show
+
+const deleteAnime = async (id) => {
+  try {
+    const deletedAnime = await db.one(
+      "DELETE FROM animes WHERE anime_id = $1 RETURNING *", id
+    );
+    return deletedAnime;
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   getAllAnimes,
   getAnime,
   createAnime,
+  deleteAnime,
 };
