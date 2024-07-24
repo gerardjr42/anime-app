@@ -1,6 +1,11 @@
 const express = require("express");
 const animes = express.Router();
+
+//Require queries
 const {getAllAnimes, getAnime, createAnime} = require("../queries/anime")
+
+//Require validations
+const { checkTitle, checkBoolean } = require("../validations/checkAnimes.js");
 
 //Index
 animes.get("/", async (req, res) => {
@@ -24,7 +29,7 @@ animes.get("/:id", async (req, res) => {
 });
 
 //Create Show
-animes.post("/", async (req, res) => {
+animes.post("/", checkTitle, checkBoolean, async (req, res) => {
   const anime = await createAnime(req.body);
   res.json(anime);
 });
