@@ -10,11 +10,10 @@ app.use(express.json());
 const animeController = require("./controllers/animeController.js");
 app.use("/animes", animeController);
 
-//Routes
 
   //Home
-app.get("/", (req, rest) => {
-  rest.send("Welcome to my Anime App!");
+app.get("/", (req, res) => {
+  res.send("Welcome to my Anime App!");
 })
 
   //404
