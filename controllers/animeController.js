@@ -2,7 +2,7 @@ const express = require("express");
 const animes = express.Router();
 
 //Require queries
-const {getAllAnimes, getAnime, createAnime, deleteAnime} = require("../queries/anime")
+const {getAllAnimes, getAnime, createAnime, deleteAnime, updateAnime} = require("../queries/anime")
 
 //Require validations
 const { checkTitle, checkBoolean } = require("../validations/checkAnimes.js");
@@ -43,6 +43,13 @@ animes.delete("/:id", async (req, res) => {
   } else {
     res.status(404).json("Anime not found");
   }
+});
+
+//Update Show
+animes.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedAnime = await updateAnime(id, req.body);
+  res.status(200).json(updatedAnime);
 });
 
 module.exports = animes;
