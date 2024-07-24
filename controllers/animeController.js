@@ -1,6 +1,6 @@
 const express = require("express");
 const animes = express.Router();
-const {getAllAnimes, getAnime} = require("../queries/anime")
+const {getAllAnimes, getAnime, createAnime} = require("../queries/anime")
 
 //Index
 animes.get("/", async (req, res) => {
@@ -21,6 +21,12 @@ animes.get("/:id", async (req, res) => {
   } else {
     res.status(404).json({ error: "not found" });
   }
+});
+
+//Create Show
+animes.post("/", async (req, res) => {
+  const anime = await createAnime(req.body);
+  res.json(anime);
 });
 
 module.exports = animes;
