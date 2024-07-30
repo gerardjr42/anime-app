@@ -46,7 +46,7 @@ animes.delete("/:id", async (req, res) => {
 });
 
 //Update Show
-animes.put("/:id", async (req, res) => {
+animes.put("/:id", checkTitle, checkBoolean, async (req, res) => {
   const { id } = req.params;
   const updatedAnime = await updateAnime(id, req.body);
   res.status(200).json(updatedAnime);
