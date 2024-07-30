@@ -49,14 +49,14 @@ const deleteAnime = async (id) => {
 const updateAnime = async (id, anime) => {
   try {
     const updatedAnime = await db.one(
-      "UPDATE animes SET title=$1, genre=$2, about=$3, seasons=$4, image_url=$5, rating=$6, is_favorite=$7 where anime_id=$8 RETURNING *",
-      [anime.title, anime.genre, anime.about, anime.seasons, anime.image_url, anime.rating, anime.is_favorite, id]
+      "UPDATE animes SET title=$1, genre=$2, about=$3, seasons=$4, image_url=$5, cover_url=$6, rating=$7, is_favorite=$8 where anime_id=$9 RETURNING *",
+      [anime.title, anime.genre, anime.about, anime.seasons, anime.image_url, anime.cover_url, anime.rating, anime.is_favorite, id]
     );
     return updatedAnime;
   } catch (error) {
     return error;
   }
-}
+};
 
 module.exports = {
   getAllAnimes,
