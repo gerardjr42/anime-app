@@ -3,8 +3,8 @@ const express = require("express");
 
 const app = express();
 
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 
 //Anime Routes
 const animeController = require("./controllers/animeController.js");
