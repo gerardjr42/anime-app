@@ -1,21 +1,20 @@
-const express = require("express");
 const cors = require("cors");
+const express = require("express");
 const app = express();
 
-
-
 //middleware
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+
+//Home Route
+app.get("/", (req, res) => {
+res.send("Welcome to my Anime App!");
+})
 
 //controller
 const animeController = require("./controllers/animeController.js");
 app.use("/animes", animeController);
 
-  //Home Route
-app.get("/", (req, res) => {
-  res.send("Welcome to my Anime App!");
-})
 
   //404
 app.get("*", (req, res) => {
