@@ -20,4 +20,22 @@ const checkBoolean = (req, res, next) => {
   }
 };
 
-module.exports = { checkTitle, checkBoolean };
+// Make sure that the URL starts with http:// or https://
+const validateURL = (req, res, next) => {
+  if (req.body.url) {
+    if (
+      req.body.url.substring(0, 7) === "http://" ||
+      req.body.url.substring(0, 8) === "https://"
+    ) {
+      return next();
+    } else {
+      return res
+        .status(400)
+        .json({ error: `You forgot to start your url with http:// or https://` });
+    }
+  } else {
+    return next();
+  }
+};
+
+module.exports = { checkTitle, checkBoolean, validateURL };

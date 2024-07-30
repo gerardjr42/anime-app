@@ -5,7 +5,7 @@ const animes = express.Router();
 const {getAllAnimes, getAnime, createAnime, deleteAnime, updateAnime} = require("../queries/anime")
 
 //Require validations
-const { checkTitle, checkBoolean } = require("../validations/checkAnimes.js");
+const { checkTitle, checkBoolean, validateURL } = require("../validations/checkAnimes.js");
 
 //Index
 animes.get("/", async (req, res) => {
@@ -29,7 +29,7 @@ animes.get("/:id", async (req, res) => {
 });
 
 //Create Show
-animes.post("/", checkTitle, checkBoolean, async (req, res) => {
+animes.post("/", checkTitle, checkBoolean, validateURL, async (req, res) => {
   const anime = await createAnime(req.body);
   res.json(anime);
 });
@@ -46,7 +46,7 @@ animes.delete("/:id", async (req, res) => {
 });
 
 //Update Show
-animes.put("/:id", checkTitle, checkBoolean, async (req, res) => {
+animes.put("/:id", checkTitle, checkBoolean, validateURL, async (req, res) => {
   const { id } = req.params;
   const updatedAnime = await updateAnime(id, req.body);
   res.status(200).json(updatedAnime);

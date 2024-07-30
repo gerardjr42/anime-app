@@ -3,13 +3,13 @@ const cors = require("cors");
 const app = express();
 
 
-const animeController = require("./controllers/animeController.js");
 
 //middleware
 app.use(express.json());
 app.use(cors());
 
 //controller
+const animeController = require("./controllers/animeController.js");
 app.use("/animes", animeController);
 
   //Home Route
