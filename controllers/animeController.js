@@ -8,7 +8,7 @@ const {getAllAnimes, getAnime, createAnime, deleteAnime, updateAnime} = require(
 const { checkTitle, checkBoolean } = require("../validations/checkAnimes.js");
 
 //Index
-animes.get("/", checkTitle, checkBoolean, async (req, res) => {
+animes.get("/", async (req, res) => {
   const allAnimes = await getAllAnimes();
   if(allAnimes){
     res.status(200).json(allAnimes);
